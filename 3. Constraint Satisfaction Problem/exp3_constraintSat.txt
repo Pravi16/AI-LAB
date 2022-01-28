@@ -1,0 +1,28 @@
+import itertools
+def getValue(word,sub):
+    s=0
+    f=1
+    for i in reversed(word):
+        s=s+f*sub[i]
+        f=f*10
+    return s
+
+
+def compute(eqn):
+    l,r=eqn.lower().replace(' ','').split('=')
+    l=l.split('+')
+    letters=set(r)
+    for word in l:
+        for j in word:
+            letters.add(j)
+    letters=list(letters)
+    
+    dig=range(10)
+    for perm in itertools.permutations(dig,len(letters)):
+        ans=dict(zip(letters,perm))
+        
+        if(sum(getValue(word,ans) for word in l) == getValue(r,ans)):
+            print(" + ".join(str(getValue(word,ans)) for word in l) + " = {} (mapping: {})".format(getValue(r,ans),ans))
+    
+print("EAT + THAT = APPLE")
+compute("POINT + ZERO = ENERGY")

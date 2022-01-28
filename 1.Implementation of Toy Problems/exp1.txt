@@ -1,0 +1,17 @@
+noOfBanana=int(input())
+totalDistance=int(input())
+maxLoad=int(input())
+l=noOfBanana
+lost=0
+for i in range(totalDistance):
+  if l==0:
+    break
+
+  while l>0:
+    l=l-maxLoad 
+    if l==1:
+      lost-=1 
+    lost+=2
+  lost-=1
+  l=noOfBanana-lost
+print(l)
